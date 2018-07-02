@@ -1,4 +1,4 @@
-class StocksController < ApplicationController
+class StocksController < ProtectedController
   before_action :set_stock, only: [:show, :update, :destroy]
 
   # GET /stocks
@@ -15,8 +15,8 @@ class StocksController < ApplicationController
 
   # POST /stocks
   def create
-    @stock = Stock.new(stock_params)
-
+    # @stock = Stock.new(stock_params)
+    @stock = current_user.stocks.build(stock_params)
     if @stock.save
       render json: @stock, status: :created
     else
@@ -46,6 +46,6 @@ class StocksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def stock_params
-      params.require(:stock).permit(:symbol, :name, :shares)
+      params.require(:stock).permit(:symbol, :name, :shares, :user_id)
     end
 end

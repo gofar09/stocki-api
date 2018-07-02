@@ -8,7 +8,8 @@ curl "http://localhost:4741/stocks" \
     "stock": {
       "symbol": "'"SPOT"'",
       "name": "'"Spotify"'",
-      "shares": "'9'"
+      "shares": "'9'",
+      "user_id": "'${ID}'"
     }
   }'
 
