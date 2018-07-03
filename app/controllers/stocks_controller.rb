@@ -3,7 +3,7 @@ class StocksController < ProtectedController
 
   # GET /stocks
   def index
-    @stocks = Stock.all
+    @stocks = current_user.stocks.all
 
     render json: @stocks
   end
@@ -46,6 +46,6 @@ class StocksController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def stock_params
-      params.require(:stock).permit(:symbol, :name, :shares, :user_id)
+      params.require(:stock).permit(:symbol, :shares, :user_id)
     end
 end
